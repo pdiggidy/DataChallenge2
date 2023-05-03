@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#Datapip in
+DC2Data/Unfiltered/
+
 # C extensions
 *.so
 
