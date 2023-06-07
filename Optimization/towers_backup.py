@@ -18,18 +18,16 @@ import pandas as pd
 # tested with Gurobi v9.0.0 and Python 3.7.0
 
 # Adding stuff
+data = pd.read_csv("../data/full_data.csv")
 wards = pd.read_csv("../DC2Data/Ward_assignments.csv")
 
 # Parameters
 ward_selection = set(list(wards["Ward"]))
 ward = "Finchley Church End Ward"
 
-result = []
-
 for ward in ward_selection:
-    data = pd.read_csv("../data/full_data.csv")
     officers = 5
-    budget = officers
+    budget = officers * 2
 
     LSOA_in_ward = wards.loc[wards.Ward == ward, :].dropna(axis=1).values.flatten().tolist()[1:]
 
@@ -55,10 +53,6 @@ for ward in ward_selection:
 
     m.optimize()
 
-    for i,el in enumerate(build):
-        result.append([LSOA_in_ward[i], build[el].x])
+    for el in build:
         if build[el].x > 0:
-            print("LSOA: ", LSOA_in_ward[i], "| Officers: ", build[el].x)
-
-result = pd.DataFrame(result, columns=["LSOA", "Officers"]).groupby("LSOA").sum()
-result.to_csv("../DC2Data/result_ILP.csv")
+            print("LSOA: ", el, "| Officers: ", build[el].x)
