@@ -8,4 +8,6 @@ Models can be found in the Forecasting Models folder. To run use google colab.
     - download `wards_crime_covid_adjusted_filled_rnd_gaps.csv` located in DC2Data Folder
     - change directories within the code where data is loaded in to the file location
     
-Final model is `TrendPrediction.ipynb`
+All models can be found in the 'Forecating Models' directory
+ - Final OLS model is `TrendPrediction.ipynb`
+ - Other models are in appropriately named notebook files
